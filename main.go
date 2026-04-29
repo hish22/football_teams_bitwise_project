@@ -20,8 +20,8 @@ func main() {
 		var value int
 		fmt.Print("Enter number (decimal): ")
 		fmt.Scanf("%d", &value)
-		// Operation => (Clear + shift right)
 
+		// Operation => (Clear + shift right)
 		// Get the first 5 bits
 		teamOne := value & 0b0000_0000_0001_1111
 		if teamOne > 17 {
