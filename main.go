@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 // ANSI escape code (colors)
 const (
@@ -17,22 +20,26 @@ const (
 func main() {
 	for {
 		// Accept input from a user
-		var value int
-		fmt.Print("Enter number (decimal): ")
-		fmt.Scanf("%d", &value)
+		var input string
+		fmt.Print("Enter value (e.g., 10, 0xA, or 0b1010): ")
+		fmt.Scanf("%s", &input)
+
+		// Base 0 = auto-detect prefix
+		value, err := strconv.ParseInt(input, 0, 64)
+		if err != nil {
+			fmt.Println("Error parsing input:", err)
+			return
+		}
 
 		// Operation => (Clear + shift right)
 		// Get the first 5 bits
 		teamOne := value & 0b0000_0000_0001_1111
-		if teamOne > 17 {
-			fmt.Printf("%s \n", "the team one exceeded the 5 bits range")
-			continue
-		}
 
 		// Get the second 5 bits
 		teamTwo := (value & 0b0000_0011_1110_0000) >> 5
-		if teamTwo > 17 {
-			fmt.Printf("%s \n", "the team two exceeded the 5 bits range")
+
+		// check if the teams are not equal or exceed 5 bits
+		if vaildateTeam(teamOne, teamTwo) {
 			continue
 		}
 
@@ -60,11 +67,25 @@ func main() {
 	}
 }
 
+func vaildateTeam(teamOne int64, teamTwo int64) bool {
+	if teamOne > 17 {
+		fmt.Printf("%s \n", "the team one exceeded the 5 bits range")
+		return true
+	} else if teamTwo > 17 {
+		fmt.Printf("%s \n", "the team two exceeded the 5 bits range")
+		return true
+	} else if teamOne == teamTwo {
+		fmt.Printf("%s \n", "the two teams are equal")
+		return true
+	}
+	return false
+}
+
 func colorize(text string, colorCode string) string {
 	return colorCode + text + "\033[0m"
 }
 
-func bringReferee(referee int) string {
+func bringReferee(referee int64) string {
 	switch referee {
 	case 0:
 		return "local referee"
@@ -75,7 +96,7 @@ func bringReferee(referee int) string {
 	}
 }
 
-func bringChamp(champ int) string {
+func bringChamp(champ int64) string {
 	switch champ {
 	case 0:
 		return "Saudi pro league"
@@ -90,7 +111,7 @@ func bringChamp(champ int) string {
 	}
 }
 
-func bringStadium(stadium int) string {
+func bringStadium(stadium int64) string {
 	switch stadium {
 	case 0:
 		return "team one stadium"
@@ -101,7 +122,7 @@ func bringStadium(stadium int) string {
 	}
 }
 
-func bringMatchState(state int) string {
+func bringMatchState(state int64) string {
 	switch state {
 	case 0:
 		return "team one won"
@@ -116,7 +137,7 @@ func bringMatchState(state int) string {
 	}
 }
 
-func bringTeam(team int) string {
+func bringTeam(team int64) string {
 	switch team {
 	case 0:
 		return "Al-Nassr"
