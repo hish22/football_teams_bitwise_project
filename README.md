@@ -4,9 +4,9 @@ A lightweight Go-based CLI tool that decodes a single integer into full football
 
 ## How to use it?
 
-- Type:
+- Write on the CLI:
 ```bash
-    go run main.go
+go run main.go
 ```
 
 - Then you can follow the demo on how it works:
