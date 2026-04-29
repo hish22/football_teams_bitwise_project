@@ -2,4 +2,4 @@
 
 A lightweight Go-based CLI tool that decodes a single integer into full football match details. By using bitmasking, this project extracts specific data—teams, stadium, championship, and referee—from a single numerical input.
 
-<img src="example.png">
+<img src="demo.png">
