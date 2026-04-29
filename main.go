@@ -48,7 +48,7 @@ func main() {
 		// Get the one referee bit
 		referee := (value & 0b1000_0000_0000_0000) >> 15
 
-		// Then your Printf looks much cleaner:
+		// Print results:
 		fmt.Printf("[%s vs %s] • [%s] • [%s] • [%s] • [Ref: %s]\n",
 			colorize(bringTeam(teamOne), Cyan),
 			colorize(bringTeam(teamTwo), Cyan),
