@@ -24,14 +24,14 @@ func main() {
 
 		// Get the first 5 bits
 		teamOne := value & 0b0000_0000_0001_1111
-		if teamOne > 18 {
+		if teamOne > 17 {
 			fmt.Printf("%s \n", "the team one exceeded the 5 bits range")
 			continue
 		}
 
 		// Get the second 5 bits
 		teamTwo := (value & 0b0000_0011_1110_0000) >> 5
-		if teamTwo > 18 {
+		if teamTwo > 17 {
 			fmt.Printf("%s \n", "the team two exceeded the 5 bits range")
 			continue
 		}
